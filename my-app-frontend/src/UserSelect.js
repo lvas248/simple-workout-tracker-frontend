@@ -1,9 +1,19 @@
 import AddUser from "./AddUser"
 import UserEdit from "./UserEdit"
 
-function UserSelect({users, handleUserChange}){
+import { useState } from 'react'
 
+function UserSelect({URL, users, handleUserChange, addNewUserToUserList}){
 
+    //States
+    const [ addBtnClick, setAddBtnClick ] = useState(false)
+
+    //Functions
+    function clickAddBtn(){
+        setAddBtnClick(!addBtnClick)
+    }
+
+    //renders
     const renderOptions = users.map( user => {
         return <option key={user.id} value={user.id}>{user.user_name}</option>
     })
@@ -21,6 +31,10 @@ function UserSelect({users, handleUserChange}){
                 </select>
             </div>
 
+            <div>
+                {addBtnClick ? <AddUser URL={URL} addNewUserToUserList={addNewUserToUserList} clickAddBtn={clickAddBtn}/> : null}
+                <button onClick={clickAddBtn}>Add User</button>
+            </div>
 
         </div>
     )
