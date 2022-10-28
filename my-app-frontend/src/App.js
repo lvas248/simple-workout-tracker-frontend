@@ -56,12 +56,19 @@ function App() {
     })
     setUsers(updatedList)
   }
+  function deleteUserFromList(deletedUser){
+    const updatedUserList = users.filter( user => {
+      return user.id !== deletedUser.id
+    })
+    setUsers(updatedUserList)
+    setCurrentUser({})
+  }
 
   return (
     <div className="App">
       <h1>Simple Workout Tracker</h1>
 
-      <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList}/>
+      <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
 
     </div>
   );

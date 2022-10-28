@@ -3,7 +3,7 @@ import UserEdit from "./UserEdit"
 
 import { useState } from 'react'
 
-function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUserList, updateUserList}){
+function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUserList, updateUserList, deleteUserFromList}){
 
     //States
     const [ addBtnClick, setAddBtnClick ] = useState(false)
@@ -15,6 +15,13 @@ function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUser
     }
     function clickEditBtn(){
         setEditBtnClick(!editBtnClick)
+    }
+    function handleDelete(){
+        fetch(URL+`users/${currentUser.id}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => deleteUserFromList(data))
     }
 
     //renders
@@ -29,8 +36,8 @@ function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUser
 
             <div>
                 <label>Select User: </label>
-                <select onChange={(e)=>handleUserChange(e.target.value)}>
-                    <option>Select</option>
+                <select value={currentUser.id} onChange={(e)=>handleUserChange(e.target.value)}>
+                    <option value=''>Select</option>
                     {renderOptions}
                 </select>
             </div>
@@ -43,7 +50,7 @@ function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUser
 
                 {editBtnClick ? <UserEdit URL={URL} currentUser={currentUser} clickEditBtn={clickEditBtn} updateUserList={updateUserList}/> : null}
                
-                {currentUser.id ? <div><button onClick={clickEditBtn} >Edit</button><button>Delete</button></div> : null}
+                {currentUser.id ? <div><button onClick={clickEditBtn} >Edit</button><button onClick={handleDelete}>Delete</button></div> : null}
             
             </div>
 
