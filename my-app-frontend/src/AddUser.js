@@ -1,12 +1,20 @@
+import { useState } from 'react'
 
+function AddUser({URL}){
 
-function AddUser(){
-
-
+//States
+    const [ newUser, setNewUser ] = useState('')
+    
+//Functions
+    function handleSubmit(e){
+        e.preventDefault()
+        console.log('Success')
+    }
     return (
-        <div>
-            AddUser
-        </div>
+        <form onSubmit={handleSubmit}>
+            <input value={newUser} onChange={e => setNewUser(e.target.value)} placeholder='New username...'/>
+            <button>Add</button>
+        </form>
     )
 }
 export default AddUser
