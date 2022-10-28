@@ -49,12 +49,19 @@ function App() {
   function addNewUserToUserList(newUser){
     setUsers([...users, newUser])
   }
+  function updateUserList(editedUser){
+    const updatedList = users.map( user =>{
+      if(user.id === editedUser.id) return editedUser
+      else return user
+    })
+    setUsers(updatedList)
+  }
 
   return (
     <div className="App">
       <h1>Simple Workout Tracker</h1>
 
-      <UserSelect URL={URL} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange}/>
+      <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList}/>
 
     </div>
   );
