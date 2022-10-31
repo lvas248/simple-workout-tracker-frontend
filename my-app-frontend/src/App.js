@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import UserSelect from './UserSelect';
 import ExerciseList from './ExerciseList';
@@ -10,6 +11,8 @@ import LogWorkout from './LogWorkout';
 function App() {
 
   const URL = 'http://localhost:9292/'
+  const history = useHistory()
+
 
 //States
   const [ users, setUsers ] = useState([])
@@ -94,7 +97,14 @@ function App() {
 
         <div id="leftPanel">
           <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
+          
+          <div>
+            <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div>
+            <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div>
+          </div>        
+          
           {currentUser.id ? <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
+        
         </div>
 
         <div id="rightPanel">
