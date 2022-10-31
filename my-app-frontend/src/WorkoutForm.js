@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { useState } from 'react'
 
-function WorkoutForm({currentUser, renderExerciseOptions}){
+function WorkoutForm({URL, currentUser, renderExerciseOptions, addToWorkoutList}){
 
     //state
     const [ workoutObj, setWorkoutObj ] = useState({
@@ -23,19 +23,39 @@ function WorkoutForm({currentUser, renderExerciseOptions}){
         copy[key] = copy[key] + 1
         setWorkoutObj(copy)
     }
-
     function decrement(key){
         const copy = {...workoutObj}
         copy[key] = copy[key] +-1
         if(copy[key] > 0) setWorkoutObj(copy)
     }
-
+    function handleSubmit(e){
+        e.preventDefault()
+        fetch(URL+`workouts`,{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(workoutObj)
+        })
+        .then(res => res.json())
+        .then(data => addToWorkoutList(data))
+        setWorkoutObj({...workoutObj, set_num: workoutObj.set_num+1, reps: 0})
+    }
+    function resetForm(){
+        setWorkoutObj({
+            'user_id': currentUser.id,
+            'exercise_id': 0,
+            'set_num': 1,
+            'reps': 0,
+            'weight': 0
+        })
+    }
 
     //render
   
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
 
             <div>
 
@@ -63,20 +83,21 @@ function WorkoutForm({currentUser, renderExerciseOptions}){
                 <label>Weight: </label>
 
                 <div>
-                    <input></input>
+                    <input value={workoutObj.weight} onChange={(e)=> updateWorkoutObjByKey('weight', e.target.value)}/>
                 </div>
 
                 <label>Reps: </label>
 
                 <div>
-                    <button type='button'>➖</button>
-                    <input />
-                    <button type='button'>➕</button>
+                    <button type='button' onClick={()=>decrement('reps')}>➖</button>
+                    <input value={workoutObj.reps} onChange={(e)=>updateWorkoutObjByKey('reps', e.target.value)}/>
+                    <button type='button' onClick={()=>increment('reps')}>➕</button>
                 </div>   
 
             </div>
 
             <button>Submit</button>
+            <button type='button' onClick={resetForm}>Reset Form</button>
         </form>
     )
 }
