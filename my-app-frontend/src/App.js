@@ -1,5 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react'
+import { Switch, Route } from 'react-router-dom'
+
 import UserSelect from './UserSelect';
 import ExerciseList from './ExerciseList';
 
@@ -95,7 +97,21 @@ function App() {
         </div>
 
         <div id="rightPanel">
+          <Switch>
 
+            <Route exact path='/'>
+                Default
+            </Route>
+
+            <Route path='/log-workout'>
+                log workout
+            </Route>
+
+            <Route path='/workout-history'>
+                Workout history
+            </Route>  
+          
+          </Switch>
         </div>
         
       </div>
