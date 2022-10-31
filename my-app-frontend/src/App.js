@@ -66,6 +66,9 @@ function App() {
   }
 
   //Exercises
+  function addExerciseToList(newExercise){
+    setExercises([...exercises, newExercise])
+  }
   function deleteExeciseFromList(deletedExercise){
     const updatedList = exercises.filter( exer =>{
       return exer.id !== deletedExercise.id
@@ -88,7 +91,7 @@ function App() {
 
         <div id="leftPanel">
           <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
-          <ExerciseList exercises={exercises} URL={URL} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>
+          <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>
         </div>
 
         <div id="rightPanel">
