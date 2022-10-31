@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react'
 import UserSelect from './UserSelect';
+import ExerciseList from './ExerciseList';
 
 
 function App() {
@@ -64,11 +65,37 @@ function App() {
     setCurrentUser({})
   }
 
+  //Exercises
+  function deleteExeciseFromList(deletedExercise){
+    const updatedList = exercises.filter( exer =>{
+      return exer.id !== deletedExercise.id
+    })
+    setExercises(updatedList)
+  }
+  function updateExerciseOnList(updatedExercise){
+    const updatedList = exercises.map( exer =>{
+      if(exer.id === updatedExercise.id) return updatedExercise
+      else return exer
+    })
+    setExercises(updatedList)
+  }
+
   return (
     <div className="App">
       <h1>Simple Workout Tracker</h1>
 
-      <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
+      <div id="container">
+
+        <div id="leftPanel">
+          <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
+          <ExerciseList exercises={exercises} URL={URL} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>
+        </div>
+
+        <div id="rightPanel">
+
+        </div>
+        
+      </div>
 
     </div>
   );
