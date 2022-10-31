@@ -12,11 +12,24 @@ function WorkoutForm({currentUser, renderExerciseOptions}){
         'weight': 0
     })
 
+    //functions
     function updateWorkoutObjByKey(key, val){
         const copy = {...workoutObj}
         copy[key] = parseInt(val) || 0
         setWorkoutObj(copy)
     }
+    function increment(key){
+        const copy = {...workoutObj}
+        copy[key] = copy[key] + 1
+        setWorkoutObj(copy)
+    }
+
+    function decrement(key){
+        const copy = {...workoutObj}
+        copy[key] = copy[key] +-1
+        if(copy[key] > 0) setWorkoutObj(copy)
+    }
+
 
     //render
   
@@ -42,9 +55,9 @@ function WorkoutForm({currentUser, renderExerciseOptions}){
                 <label>Set Number:</label>
 
                 <div>
-                    <button type='button'>➖</button>
-                    <h4>0</h4>
-                    <button type='button'>➕</button>
+                    <button type='button' onClick={()=>decrement('set_num')}>➖</button>
+                    <h4>{workoutObj.set_num}</h4>
+                    <button type='button' onClick={()=>increment('set_num')}>➕</button>
                 </div>
 
                 <label>Weight: </label>
