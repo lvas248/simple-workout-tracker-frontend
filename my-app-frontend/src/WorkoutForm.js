@@ -1,6 +1,25 @@
+import { render } from '@testing-library/react'
+import { useState } from 'react'
 
+function WorkoutForm({currentUser, renderExerciseOptions}){
 
-function WorkoutForm(){
+    //state
+    const [ workoutObj, setWorkoutObj ] = useState({
+        'user_id': currentUser.id,
+        'exercise_id': 0,
+        'set_num': 1,
+        'reps': 0,
+        'weight': 0
+    })
+
+    function updateWorkoutObjByKey(key, val){
+        const copy = {...workoutObj}
+        copy[key] = parseInt(val) || 0
+        setWorkoutObj(copy)
+    }
+
+    //render
+  
 
     return (
         <form>
@@ -14,8 +33,9 @@ function WorkoutForm(){
                 </div>
 
                 <div>
-                    <select>
+                    <select value={workoutObj.exercise_id} onChange={e=>updateWorkoutObjByKey('exercise_id', e.target.value)}>
                         <option>Select</option>
+                        {renderExerciseOptions}
                     </select>
                 </div>
 

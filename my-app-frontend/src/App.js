@@ -40,14 +40,17 @@ function App() {
   },[])
 
 //functions
-  //User
+  //User CRUD
   function handleUserChange(selectedUserId){
+
+    console.log(selectedUserId)
     if(selectedUserId !== ''){
-      const currentUser = users.find(user =>{
+      const selectedUser = users.find(user =>{
       return user.id === parseInt(selectedUserId)
       })
-      setCurrentUser(currentUser)
-      // history.push('/new-workout')
+   
+      setCurrentUser(selectedUser)
+      history.push('/log-workout')
     }else{
       setCurrentUser({})
       // history.push('/')
@@ -71,7 +74,7 @@ function App() {
     setCurrentUser({})
   }
 
-  //Exercises
+  //Exercises CRUD
   function addExerciseToList(newExercise){
     setExercises([...exercises, newExercise])
   }
@@ -88,6 +91,11 @@ function App() {
     })
     setExercises(updatedList)
   }
+
+ //other
+  const renderExerciseOptions = exercises.map( exer =>{
+    return <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>
+  })  
 
   return (
     <div className="App">
@@ -115,7 +123,7 @@ function App() {
             </Route>
 
             <Route path='/log-workout'>
-                <LogWorkout />
+                <LogWorkout currentUser={currentUser} renderExerciseOptions={renderExerciseOptions}/>
             </Route>
 
             <Route path='/workout-history'>

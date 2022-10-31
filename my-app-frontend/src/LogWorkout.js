@@ -1,15 +1,14 @@
 import WorkoutForm from "./WorkoutForm"
 import TodaysWorkout from "./TodaysWorkout"
 
-function LogWorkout(){
+function LogWorkout({currentUser, renderExerciseOptions}){
 
 
     return(
         <div>
-            Log Workout
-            <WorkoutForm />
-            <TodaysWorkout />
+            <WorkoutForm currentUser={currentUser} renderExerciseOptions={renderExerciseOptions}/>
+            <TodaysWorkout renderExerciseOptions={renderExerciseOptions}/>
         </div>
-    )
+    ) 
 }
-export default LogWorkout
+export default LogWorkout 
