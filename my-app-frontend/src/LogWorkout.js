@@ -1,4 +1,4 @@
-
+import WorkoutForm from "./WorkoutForm"
 
 function LogWorkout(){
 
