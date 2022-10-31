@@ -1,13 +1,13 @@
 import WorkoutForm from "./WorkoutForm"
-import TodaysWorkout from "./TodaysWorkout"
+import WorkoutTable from "./WorkoutTable"
 
-function LogWorkout({currentUser, renderExerciseOptions}){
+function LogWorkout({URL, workouts, currentUser, renderExerciseOptions, addToWorkoutList}){
 
 
     return(
         <div>
-            <WorkoutForm currentUser={currentUser} renderExerciseOptions={renderExerciseOptions}/>
-            <TodaysWorkout renderExerciseOptions={renderExerciseOptions}/>
+            <WorkoutForm URL={URL} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList}/>
+            <WorkoutTable renderExerciseOptions={renderExerciseOptions} workouts={workouts}/>
         </div>
     ) 
 }

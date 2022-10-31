@@ -91,6 +91,10 @@ function App() {
     })
     setExercises(updatedList)
   }
+  //Workout CRUD
+  function addToWorkoutList(newWorkout){
+    setWorkouts([...workouts, newWorkout])
+  }
 
  //other
   const renderExerciseOptions = exercises.map( exer =>{
@@ -123,7 +127,7 @@ function App() {
             </Route>
 
             <Route path='/log-workout'>
-                <LogWorkout currentUser={currentUser} renderExerciseOptions={renderExerciseOptions}/>
+                <LogWorkout URL={URL} workouts={workouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList}/>
             </Route>
 
             <Route path='/workout-history'>
