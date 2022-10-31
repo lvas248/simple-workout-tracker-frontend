@@ -95,6 +95,19 @@ function App() {
   function addToWorkoutList(newWorkout){
     setWorkouts([...workouts, newWorkout])
   }
+  function deleteWorkoutFromList(deletedWorkout){
+    const updatedList = workouts.filter( wrk =>{
+      return wrk.id !== deletedWorkout.id
+    })
+    setWorkouts(updatedList)
+  }
+  function updateWorkoutOnList(updatedWorkout){
+    const updatedList = workouts.map(wrk =>{
+      if(wrk.id === updatedWorkout.id) return updatedWorkout
+      else return wrk
+    })
+    setWorkouts(updatedList)
+  }
 
  //other
   const renderExerciseOptions = exercises.map( exer =>{
@@ -127,7 +140,7 @@ function App() {
             </Route>
 
             <Route path='/log-workout'>
-                <LogWorkout URL={URL} workouts={workouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList}/>
+                <LogWorkout URL={URL} workouts={workouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
             </Route>
 
             <Route path='/workout-history'>

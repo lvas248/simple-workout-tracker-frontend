@@ -1,9 +1,9 @@
 import WorkoutTableRow from "./WorkoutTableRow"
 
-function WorkoutTable({renderExerciseOptions, workouts}){
+function WorkoutTable({URL, renderExerciseOptions, workouts, deleteWorkoutFromList, updateWorkoutOnList}){
 
     const renderWorkouts = workouts.map( wrk => {
-        return <WorkoutTableRow key={wrk.id} wrk={wrk} renderExerciseOptions={renderExerciseOptions}/>
+        return <WorkoutTableRow key={wrk.id} wrk={wrk} URL={URL} renderExerciseOptions={renderExerciseOptions} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
     })
 
     return (
