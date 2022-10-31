@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import UserSelect from './UserSelect';
 import ExerciseList from './ExerciseList';
+import LogWorkout from './LogWorkout';
 
 
 function App() {
@@ -93,7 +94,7 @@ function App() {
 
         <div id="leftPanel">
           <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
-          <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>
+          {currentUser.id ? <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
         </div>
 
         <div id="rightPanel">
@@ -104,7 +105,7 @@ function App() {
             </Route>
 
             <Route path='/log-workout'>
-                log workout
+                <LogWorkout />
             </Route>
 
             <Route path='/workout-history'>
