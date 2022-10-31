@@ -17,7 +17,7 @@ function ExerciseListItem({URL, exer, updateExerciseOnList, deleteExeciseFromLis
         .then(data => deleteExeciseFromList(data))
     }
 
-    function handleEdit(e){
+    function handleEditSubmit(e){
         e.preventDefault()
         fetch(URL+`exercises/${exer.id}`,{
             method: 'PATCH',
@@ -35,7 +35,7 @@ function ExerciseListItem({URL, exer, updateExerciseOnList, deleteExeciseFromLis
     return(
         <li>
             <h5>{exer.exercise_name}</h5>
-            {editBtnClick ? <form><input value={exerciseName} onChange={e=>setExerciseName(e.target.value)}/><button onClick={handleEdit} >Update</button></form>:<button onClick={clickEditBtn}>Edit</button>}
+            {editBtnClick ? <form onSubmit={handleEditSubmit}><input value={exerciseName} onChange={e=>setExerciseName(e.target.value)}/><button>Update</button></form>:<button onClick={clickEditBtn}>Edit</button>}
             <button onClick={handleDelete}>Delete</button>
         </li>
     )
