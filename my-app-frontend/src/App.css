@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: rgb(8,18,23);
+  color: white;
 }
 
 
@@ -14,7 +16,7 @@
     grid-template-columns: 33% 67%;
 }
 #userSelect{
-  background-color: yellow;
+  /* background-color: yellow; */
   margin: 5%;
 }
 #userSelect > * {
@@ -22,22 +24,33 @@
 }
 
 #leftPanel{
-  background-color: goldenrod;
-  
+  background-color: rgb(68  107 144);
+  padding: 5%;
 }
 
 #rightPanel{
-  background-color: deepskyblue;
+  background-color: rgb(115 132 159);
+}
 
-}
 #exerciseList{
-  background-color: lightyellow;
+  background-color: rgb(59  81  114);
+  justify-content: center;
+ 
 }
+
+#exerTable{
+  margin: auto;
+  text-align: left;
+}
+
+
 
 .btn {
   padding: 15%;
   border: 2px solid black;
-  background-color: green;
+  background-color: rgb(59  81  114);
   color: white;
   cursor: pointer;
+  color: rgb(23 201 68);
+  margin: 2%;
 }
