@@ -1,10 +1,11 @@
+import WorkoutTable from "./WorkoutTable"
 
-
-function WorkoutHistory(){
+function WorkoutHistory({workouts, addToWorkoutList, updateWorkoutOnList, deleteWorkoutFromList}){
 
     return (
         <div>
-            WorkoutHistory
+            <h2>Workout History</h2>
+            <WorkoutTable workouts={workouts} addToWorkoutList={addToWorkoutList} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList}/>
         </div>
     )
 }
