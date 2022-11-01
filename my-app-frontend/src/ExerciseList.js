@@ -1,6 +1,5 @@
 import ExerciseListItem from "./ExerciseListItem"
 import { useState } from 'react'
-import { click } from "@testing-library/user-event/dist/click"
 
 function ExerciseList({URL, exercises, addExerciseToList, deleteExeciseFromList, updateExerciseOnList}){
 
@@ -37,10 +36,10 @@ function ExerciseList({URL, exercises, addExerciseToList, deleteExeciseFromList,
     return (
         <div id='exerciseList'>
             <h2>Exercise List</h2>
-            {addBtnClick ? <form onSubmit={handleSubmit}><button onClick={clickAddBtn}>x</button><input value={newExerName} onChange={e=>setNewExerName(e.target.value)}/><button>Add</button></form> :<button onClick={clickAddBtn}>Add Exercise</button>}
-            <ul>
+            {addBtnClick ? <form onSubmit={handleSubmit}><button type='button' onClick={clickAddBtn}>x</button><input value={newExerName} onChange={e=>setNewExerName(e.target.value)}/><button>Add</button></form> : <button onClick={clickAddBtn}>Add Exercise</button>}
+            <table id='exerTable'>
                 {renderExercises}
-            </ul>
+            </table>
         </div>
     )
 }

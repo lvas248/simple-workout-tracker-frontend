@@ -2,9 +2,11 @@ import { useState } from 'react'
 
 function ExerciseListItem({URL, exer, updateExerciseOnList, deleteExeciseFromList}){
 
+    //state
     const [ exerciseName, setExerciseName ] = useState(exer.exercise_name)
     const [ editBtnClick, setEditBtnClick ] = useState(false)
 
+    //functions
     function clickEditBtn(){
         setEditBtnClick(!editBtnClick)
     }
@@ -32,12 +34,15 @@ function ExerciseListItem({URL, exer, updateExerciseOnList, deleteExeciseFromLis
         .then(data => updateExerciseOnList(data))
         clickEditBtn()
     }
+    
     return(
-        <li>
-            <h5>{exer.exercise_name}</h5>
-            {editBtnClick ? <form onSubmit={handleEditSubmit}><input value={exerciseName} onChange={e=>setExerciseName(e.target.value)}/><button>Update</button></form>:<button onClick={clickEditBtn}>Edit</button>}
-            <button onClick={handleDelete}>Delete</button>
-        </li>
+        <tr className='listItem'>
+            <td><h5>{exer.exercise_name}</h5></td>
+            <td>
+                {editBtnClick ? <form onSubmit={handleEditSubmit}><input value={exerciseName} onChange={e=>setExerciseName(e.target.value)}/><button>Update</button></form>:<button onClick={clickEditBtn}>✍🏾</button>}
+                <button onClick={handleDelete}>❌</button>
+            </td>
+        </tr>
     )
 }
 export default ExerciseListItem
