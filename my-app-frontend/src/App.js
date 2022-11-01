@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import UserSelect from './UserSelect';
 import ExerciseList from './ExerciseList';
 import LogWorkout from './LogWorkout';
+import WorkoutHistory from './WorkoutHistory';
 
 
 function App() {
@@ -42,18 +43,16 @@ function App() {
 //functions
   //User CRUD
   function handleUserChange(selectedUserId){
-
-    console.log(selectedUserId)
     if(selectedUserId !== ''){
       const selectedUser = users.find(user =>{
       return user.id === parseInt(selectedUserId)
       })
    
       setCurrentUser(selectedUser)
-      history.push('/log-workout')
+      history.push('/workout-history')
     }else{
       setCurrentUser({})
-      // history.push('/')
+      history.push('/')
     }
   }
   function addNewUserToUserList(newUser){
@@ -110,6 +109,10 @@ function App() {
   }
 
  //other
+
+  const filteredWorkouts = workouts.filter( wrk => {
+    return wrk.user_id === currentUser.id
+  })
   const renderExerciseOptions = exercises.map( exer =>{
     return <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>
   })  
@@ -140,11 +143,11 @@ function App() {
             </Route>
 
             <Route path='/log-workout'>
-                <LogWorkout URL={URL} workouts={workouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
+                <LogWorkout URL={URL} workouts={filteredWorkouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
             </Route>
 
             <Route path='/workout-history'>
-                Workout history
+              <WorkoutHistory exercises={exercises} />
             </Route>  
           
           </Switch>
