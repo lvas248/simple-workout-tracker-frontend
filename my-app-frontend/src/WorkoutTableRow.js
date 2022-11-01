@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 function WorkoutTableRow({wrk, currentUser, URL, renderExerciseOptions, deleteWorkoutFromList, updateWorkoutOnList}){
-
     //State
     const [ editBtnClick, setEditBtnClick ] = useState(false)
 
@@ -41,24 +40,26 @@ function WorkoutTableRow({wrk, currentUser, URL, renderExerciseOptions, deleteWo
             body: JSON.stringify(workoutObj)
         })
         .then(res => res.json())
-        .then(data => updateWorkoutOnList(data))
+        .then(data => {            
+            updateWorkoutOnList(data)
+        })
         clickEditBtn()
     }
+    
 
     return (
         <tr>
             <td>{convertDate(wrk.created_at)}</td>
-            <td>{editBtnClick ? <select value={workoutObj.exercise_name} onChange={e=>handleChange('exercise_id', parseInt(e.target.value))}>{renderExerciseOptions}</select>:wrk.exercise_name}</td>
-            {/* <td>{workoutObj.exercises.exercise_name}</td> */}
+            <td>{editBtnClick ? <select value={workoutObj.exercise_id} onChange={e=>handleChange('exercise_id', parseInt(e.target.value))}>{renderExerciseOptions}</select> : wrk.exercise.exercise_name}</td>     
             <td>{editBtnClick ? <input value={workoutObj.set_num} onChange={e=>handleChange('set_num', parseInt(e.target.value))}/> : wrk.set_num}</td>
             <td>{editBtnClick ? <input value={workoutObj.weight} onChange={e=>handleChange('weight', parseInt(e.target.value))}/> : wrk.weight}</td>
             <td>{editBtnClick ? <input value={workoutObj.reps} onChange={e=>handleChange('reps', parseInt(e.target.value))}/> : wrk.reps}</td>
             <td>
                 {editBtnClick ? <button onClick={handleUpdate}>Submit</button> : <div><button onClick={clickEditBtn}>✍🏾</button><button onClick={handleDelete}>❌</button></div>}
             </td>
-        </tr>    )
+        </tr>    
+        )
 }
 export default WorkoutTableRow
 
 
-// Work through the console errors
