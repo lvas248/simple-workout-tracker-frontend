@@ -54,9 +54,9 @@ function WorkoutForm({URL, currentUser, renderExerciseOptions, addToWorkoutList}
   
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="wrkForm">
 
-            <div>
+            <div id='innerForm'>
 
                 <h2>Track Your Set</h2>
 
@@ -73,7 +73,7 @@ function WorkoutForm({URL, currentUser, renderExerciseOptions, addToWorkoutList}
 
                 <label>Set Number:</label>
 
-                <div>
+                <div className='set'>
                     <button type='button' onClick={()=>decrement('set_num')}>➖</button>
                     <h4>{workoutObj.set_num}</h4>
                     <button type='button' onClick={()=>increment('set_num')}>➕</button>
@@ -87,7 +87,7 @@ function WorkoutForm({URL, currentUser, renderExerciseOptions, addToWorkoutList}
 
                 <label>Reps: </label>
 
-                <div>
+                <div className='set'>
                     <button type='button' onClick={()=>decrement('reps')}>➖</button>
                     <input value={workoutObj.reps} onChange={(e)=>updateWorkoutObjByKey('reps', e.target.value)}/>
                     <button type='button' onClick={()=>increment('reps')}>➕</button>

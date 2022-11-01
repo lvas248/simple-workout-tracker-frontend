@@ -7,9 +7,9 @@ function WorkoutTable({URL, currentUser, renderExerciseOptions, workouts, delete
     })
 
     return (
-        <div id='todaywrk'>
+        <div>
 
-            <table>
+            <table id='wrkTable'>
                 <thead>
                     <tr>
                         <th>Date</th>

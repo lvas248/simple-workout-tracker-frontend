@@ -30,17 +30,48 @@
 
 #rightPanel{
   background-color: rgb(115 132 159);
+  padding: 5% 10%;
+}
+#wrkTable{
+  margin:auto;
+  width: auto;
 }
 
-#exerciseList{
+#exerciseList, #userSelect{
   background-color: rgb(59  81  114);
   justify-content: center;
- 
+  padding: 5%;
+  border: 2px solid black; 
+  margin: 2px;
 }
 
 #exerTable{
   margin: auto;
   text-align: left;
+}
+.set{
+  display: flex;
+  justify-content: center;
+}
+.set > *{
+  margin: 2% 4%;
+}
+
+#innerForm > * {
+  margin: 2%
+}
+
+#wrkForm input{
+  width: 5%;
+  text-align: center;
+}
+#wrkForm > * {
+  margin: 2%;
+}
+
+#wrkForm{
+  border-bottom: 2px rgb(23 201 68) solid;
+  padding-bottom: 5%;
 }
 
 
@@ -49,8 +80,26 @@
   padding: 15%;
   border: 2px solid black;
   background-color: rgb(59  81  114);
-  color: white;
   cursor: pointer;
   color: rgb(23 201 68);
   margin: 2%;
+}
+
+thead{
+  border-bottom: white 2px solid;
+}
+#rightPanel td{
+  border-left: white 1px solid;
+  border-top: white 1px solid;
+  padding: auto 4px;
+  width:2%
+}
+
+select {
+  width: auto;
+  text-align: center;
+}
+input{
+  max-width: 25px;
+  text-align: center;
 }
