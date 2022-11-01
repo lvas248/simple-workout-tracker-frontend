@@ -147,9 +147,9 @@ function App() {
             </Route>
 
             <Route path='/workout-history'>
-              <WorkoutHistory workouts={filteredWorkouts} addToWorkoutList={addToWorkoutList} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList} />
+              <WorkoutHistory URL={URL}currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} workouts={filteredWorkouts} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList} />
             </Route>  
-          
+
           </Switch>
         </div>
         

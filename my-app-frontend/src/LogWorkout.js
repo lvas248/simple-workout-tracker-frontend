@@ -3,12 +3,12 @@ import WorkoutTable from "./WorkoutTable"
 
 function LogWorkout({URL, workouts, currentUser, renderExerciseOptions, addToWorkoutList, deleteWorkoutFromList, updateWorkoutOnList}){
 
-    const today = new Date()
-    const todayFormatted = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
-
     const todaysWorkouts = workouts.filter( wrk => {
-        return wrk.created_at.includes(todayFormatted)
+        ///convert workout UTC stamp to local date time
+        //return workout if convert time date includes local date
+        return new Date(wrk.created_at).toDateString().includes(new Date().toDateString())
     })
+
 
     return(
         <div>
