@@ -2,8 +2,11 @@ import AddUser from "./AddUser"
 import UserEdit from "./UserEdit"
 
 import { useState } from 'react'
+import { useHistory} from 'react-router-dom'
 
 function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUserList, updateUserList, deleteUserFromList}){
+
+    const history = useHistory()
 
     //States
     const [ addBtnClick, setAddBtnClick ] = useState(false)
@@ -22,6 +25,7 @@ function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUser
         })
         .then(res => res.json())
         .then(data => deleteUserFromList(data))
+        history.push('/')
     }
 
     //renders

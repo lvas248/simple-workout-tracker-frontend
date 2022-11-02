@@ -98,6 +98,13 @@ input{
   padding: 5%;
 }
 
-#userEditForm input, #exerciseList input, #addUserForm input {
+#userEditForm input, #exerciseList input, #addUserForm input, #workoutHistory input {
   max-width: 100px
+}
+#filter {
+  margin: 5% auto;
+}
+
+#filter button {
+  margin: auto 3%
 }

@@ -49,7 +49,7 @@ function App() {
       })
    
       setCurrentUser(selectedUser)
-      history.push('/log-workout')
+      history.push('/')
     }else{
       setCurrentUser({})
       history.push('/')
@@ -149,7 +149,7 @@ function App() {
           <Switch>
 
             <Route exact path='/'>
-                <h2>Select or Add User</h2>
+                {currentUser.id ? null : <h2>Select or Add User</h2>}
             </Route>
 
             <Route path='/log-workout'>
