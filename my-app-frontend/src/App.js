@@ -50,6 +50,7 @@ function App() {
       history.push('/')
     }
   }
+
   function addNewUserToUserList(newUser){
     setUsers([...users, newUser])
   }
