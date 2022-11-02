@@ -5,12 +5,11 @@ function WorkoutHistory({URL, currentUser, renderExerciseOptions, workouts, upda
 
     //Maybe add a filter or search or reorder??
     const [ reorderBtnClick, setReorderBtnClick ] = useState(false)
-    const [ searchText, setSearchText ] = useState('')
+    const [ exerciseFilter, setExerciseFilter ] = useState(0)
 
     function clickReorderBtn(){
         setReorderBtnClick(!reorderBtnClick)
     }
-
 
     function oldestFirst(array){
         array.sort((a,b)=>{
@@ -26,15 +25,32 @@ function WorkoutHistory({URL, currentUser, renderExerciseOptions, workouts, upda
         })
     }
 
-    reorderBtnClick ? oldestFirst(workouts) : newestFirst(workouts)
+    function handleChange(e){
+        setExerciseFilter(parseInt(e.target.value))
+    }
+
+    const filteredByExercise = workouts.filter( wrk =>{
+        if(exerciseFilter > 0) return wrk.exercise_id === exerciseFilter
+        else return wrk
+    })
+
+    reorderBtnClick ? oldestFirst(filteredByExercise) : newestFirst(filteredByExercise)
 
 
     return (
         <div id='workoutHistory'>
             <h2>Workout History</h2>
-            <button onClick={clickReorderBtn}>Re-order</button>
-            <input placeholder='workout' />
-            <WorkoutTable URL={URL} workouts={workouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList}/>
+
+            <div id='filter'>
+                <label>Filter By Exercise: </label>
+                <select onChange={handleChange}>
+                    <option value='0'>All</option>
+                    {renderExerciseOptions}
+                </select>
+                <button onClick={clickReorderBtn}>Re-order</button>
+            </div>
+
+            <WorkoutTable URL={URL} workouts={filteredByExercise} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList}/>
         </div>
     )
 }
