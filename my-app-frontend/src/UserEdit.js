@@ -21,7 +21,7 @@ function UserEdit({URL, currentUser, clickEditBtn, updateUserList}){
     }
 
     return(
-       <form onSubmit={handleEdit}>
+       <form onSubmit={handleEdit} id='userEditForm'>
             <input value={editedUsername} onChange={e => setEditedUsername(e.target.value)}/>
             <button>Update</button>
        </form>

@@ -15,45 +15,41 @@
     display: grid;
     grid-template-columns: 33% 67%;
 }
-#userSelect{
-  /* background-color: yellow; */
-  margin: 5%;
-}
+
 #userSelect > * {
   margin: 5%;
-}
-
-#leftPanel{
-  background-color: rgb(68  107 144);
-  padding: 5%;
 }
 
 #rightPanel{
   background-color: rgb(115 132 159);
   padding: 5% 10%;
 }
-#wrkTable{
-  margin:auto;
-  width: auto;
-}
 
-#exerciseList, #userSelect{
+#exerciseList, #userSelect, .btn{
   background-color: rgb(59  81  114);
   justify-content: center;
   padding: 5%;
   border: 2px solid black; 
-  margin: 2px;
+  margin: 5%;
+}
+
+.btn {
+  padding: 15%;
+  cursor: pointer;
+  color: rgb(23 201 68);
 }
 
 #exerTable{
   margin: auto;
   text-align: left;
 }
+
 .set{
   display: flex;
   justify-content: center;
 }
-.set > *{
+
+.set > * {
   margin: 2% 4%;
 }
 
@@ -65,41 +61,43 @@
   width: 5%;
   text-align: center;
 }
-#wrkForm > * {
-  margin: 2%;
-}
 
-#wrkForm{
-  border-bottom: 2px rgb(23 201 68) solid;
+#wrkForm {
+  border-bottom: 2px white solid;
   padding-bottom: 5%;
 }
 
 
-
-.btn {
-  padding: 15%;
-  border: 2px solid black;
-  background-color: rgb(59  81  114);
-  cursor: pointer;
-  color: rgb(23 201 68);
-  margin: 2%;
-}
-
 thead{
   border-bottom: white 2px solid;
 }
+
 #rightPanel td{
   border-left: white 1px solid;
   border-top: white 1px solid;
   padding: auto 4px;
-  width:2%
+  width:2%;
+}
+
+#rightPanel h2 {
+  color: rgb(23 201 68);
 }
 
 select {
   width: auto;
   text-align: center;
 }
+
 input{
   max-width: 25px;
   text-align: center;
+}
+
+#leftPanel{
+  background-color: rgb(68  107 144);
+  padding: 5%;
+}
+
+#userEditForm input, #exerciseList input, #addUserForm input {
+  max-width: 100px
 }

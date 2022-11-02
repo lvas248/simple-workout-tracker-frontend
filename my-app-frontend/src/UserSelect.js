@@ -30,7 +30,7 @@ function UserSelect({URL, users, currentUser, handleUserChange, addNewUserToUser
     })
 
     return (
-        <div>
+        <div id='userSelect'>
 
             <h2>Select User</h2>
 

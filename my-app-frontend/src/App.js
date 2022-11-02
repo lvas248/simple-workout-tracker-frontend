@@ -49,7 +49,7 @@ function App() {
       })
    
       setCurrentUser(selectedUser)
-      history.push('/workout-history')
+      history.push('/log-workout')
     }else{
       setCurrentUser({})
       history.push('/')
@@ -91,7 +91,9 @@ function App() {
     setExercises(updatedList)
   }
   //Workout CRUD
+
   function addToWorkoutList(newWorkout){
+    newWorkout = addExerciseNameToWorkoutObject(newWorkout)
     setWorkouts([...workouts, newWorkout])
   }
   function deleteWorkoutFromList(deletedWorkout){
@@ -101,6 +103,7 @@ function App() {
     setWorkouts(updatedList)
   }
   function updateWorkoutOnList(updatedWorkout){
+    updatedWorkout = addExerciseNameToWorkoutObject(updatedWorkout)
     const updatedList = workouts.map(wrk =>{
       if(wrk.id === updatedWorkout.id) return updatedWorkout
       else return wrk
@@ -109,7 +112,14 @@ function App() {
   }
 
  //other
+  function addExerciseNameToWorkoutObject(workoutObj){
+    //adds exercise name to workout obj, so that the object matched the format of the get requested data
+    const exercise = exercises.find( exer => exer.id === workoutObj.exercise_id)
+    workoutObj['exercise'] = {exercise_name: exercise.exercise_name}
+    return workoutObj
+  }
 
+  //render
   const filteredWorkouts = workouts.filter( wrk => {
     return wrk.user_id === currentUser.id
   })
@@ -126,10 +136,10 @@ function App() {
         <div id="leftPanel">
           <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
           
-          <div>
-            <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div>
-            <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div>
-          </div>        
+        
+          {currentUser.id ? <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div> : null }
+          {currentUser.id ? <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div> : null}
+               
           
           {currentUser.id ? <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
         
@@ -139,7 +149,7 @@ function App() {
           <Switch>
 
             <Route exact path='/'>
-                Default
+                <h2>Select or Add User</h2>
             </Route>
 
             <Route path='/log-workout'>

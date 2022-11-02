@@ -37,8 +37,11 @@ function ExerciseList({URL, exercises, addExerciseToList, deleteExeciseFromList,
         <div id='exerciseList'>
             <h2>Exercise List</h2>
             {addBtnClick ? <form onSubmit={handleSubmit}><button type='button' onClick={clickAddBtn}>x</button><input value={newExerName} onChange={e=>setNewExerName(e.target.value)}/><button>Add</button></form> : <button onClick={clickAddBtn}>Add Exercise</button>}
+            
             <table id='exerTable'>
-                {renderExercises}
+                <tbody>
+                    {renderExercises}
+                </tbody>
             </table>
         </div>
     )
