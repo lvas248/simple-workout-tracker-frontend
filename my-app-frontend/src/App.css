@@ -21,8 +21,8 @@
 }
 
 #rightPanel{
-  background-color: rgb(115 132 159);
-  padding: 5% 10%;
+  background-color: rgb(68  107 144);
+  /* padding: 0 10%; */
 }
 
 #exerciseList, #userSelect, .btn{
@@ -34,9 +34,10 @@
 }
 
 .btn {
-  padding: 15%;
+  padding: 5%;
   cursor: pointer;
   color: rgb(23 201 68);
+  width: 25%;
 }
 
 #exerTable{
@@ -107,4 +108,19 @@ input{
 
 #filter button {
   margin: auto 3%
+}
+
+#buttonsDiv{
+  display: flex;
+  gap: 5%;
+  background-color: rgb(68  107 144);
+}
+
+#showPanel {
+  padding: 2%;
+  margin: auto 5% 5% auto;
+  background-color: rgb(115 132 159);
+}
+#wrkTable{
+  margin: auto;
 }

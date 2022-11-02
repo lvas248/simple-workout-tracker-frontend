@@ -38,7 +38,7 @@ function WorkoutHistory({URL, currentUser, renderExerciseOptions, workouts, upda
 
 
     return (
-        <div id='workoutHistory'>
+        <div id='showPanel'>
             <h2>Workout History</h2>
 
             <div id='filter'>

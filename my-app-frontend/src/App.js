@@ -137,8 +137,8 @@ function App() {
           <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
           
         
-          {currentUser.id ? <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div> : null }
-          {currentUser.id ? <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div> : null}
+          {/* {currentUser.id ? <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div> : null }
+          {currentUser.id ? <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div> : null} */}
                
           
           {currentUser.id ? <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
@@ -146,21 +146,30 @@ function App() {
         </div>
 
         <div id="rightPanel">
-          <Switch>
 
-            <Route exact path='/'>
-                {currentUser.id ? null : <h2>Select or Add User</h2>}
-            </Route>
+          <div id='buttonsDiv'>
+            {currentUser.id ? <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div> : null }  
+            {currentUser.id ? <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div> : null}
+          </div>
 
-            <Route path='/log-workout'>
-                <LogWorkout URL={URL} workouts={filteredWorkouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
-            </Route>
+          <div>
+            <Switch id='showPanel'>
 
-            <Route path='/workout-history'>
-              <WorkoutHistory URL={URL}currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} workouts={filteredWorkouts} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList} />
-            </Route>  
+              <Route exact path='/'>
+                  {currentUser.id ? null : <h2>Select or Add User</h2>}
+              </Route>
 
-          </Switch>
+              <Route path='/log-workout'>
+                  <LogWorkout URL={URL} workouts={filteredWorkouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
+              </Route>
+
+              <Route path='/workout-history'>
+                <WorkoutHistory URL={URL}currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} workouts={filteredWorkouts} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList} />
+              </Route>  
+
+            </Switch>
+          </div>
+       
         </div>
         
       </div>

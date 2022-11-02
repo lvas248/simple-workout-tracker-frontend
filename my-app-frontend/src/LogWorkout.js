@@ -11,7 +11,7 @@ function LogWorkout({URL, workouts, currentUser, renderExerciseOptions, addToWor
 
 
     return(
-        <div>
+        <div id='showPanel'>
             <WorkoutForm URL={URL} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList}/>            
             <h2>Today's Workout</h2>
             <WorkoutTable URL={URL} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} workouts={todaysWorkouts} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
