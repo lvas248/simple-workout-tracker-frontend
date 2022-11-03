@@ -51,16 +51,20 @@ function App() {
     }
   }
 
-  function addNewUserToUserList(newUser){
-    setUsers([...users, newUser])
+  function addNewUserToUserList(editedUser){
+    editedUser.push({workouts: []})
+    setUsers([...users, editedUser])
   }
+
   function updateUserList(editedUser){
+    editedUser.push({workouts: []})
     const updatedList = users.map( user =>{
       if(user.id === editedUser.id) return editedUser
       else return user
     })
     setUsers(updatedList)
   }
+
   function deleteUserFromList(deletedUser){
     const updatedUserList = users.filter( user => {
       return user.id !== deletedUser.id
@@ -73,12 +77,15 @@ function App() {
   function addExerciseToList(newExercise){
     setExercises([...exercises, newExercise])
   }
+
   function deleteExeciseFromList(deletedExercise){
     const updatedList = exercises.filter( exer =>{
       return exer.id !== deletedExercise.id
     })
     setExercises(updatedList)
   }
+
+
   function updateExerciseOnList(updatedExercise){
     const updatedList = exercises.map( exer =>{
       if(exer.id === updatedExercise.id) return updatedExercise
@@ -89,30 +96,58 @@ function App() {
   //Workout CRUD
 
   function addToWorkoutList(newWorkout){
-    newWorkout = addExerciseNameToWorkoutObject(newWorkout)
-    setWorkouts([...workouts, newWorkout])
-  }
-  function deleteWorkoutFromList(deletedWorkout){
-    const updatedList = workouts.filter( wrk =>{
-      return wrk.id !== deletedWorkout.id
+  //find the selected user in the list of users and push new workout into their workout array
+    const selectedUser = {...currentUser}
+    selectedUser.workouts.push(newWorkout)
+    //copy the state of users, replace currentUserObj with newUserObj
+    const updatedUsers = users.map( user => {
+      if(user.id === selectedUser.id) return selectedUser
+      else return user
     })
-    setWorkouts(updatedList)
+    //set state with update user list
+    setUsers(updatedUsers)
+    // cycle through users, when current user appears, add new workout to their workouts
   }
+
+
+
+  function deleteWorkoutFromList(deletedWorkout){
+    //copy and update current user (remove deleted workout from it's workout list)
+    const selectedUser = {...currentUser}
+    selectedUser.workouts = selectedUser.workouts.filter( wrk => wrk.id !== deletedWorkout.id)
+    //set current user state
+    setCurrentUser(selectedUser)
+
+    //copy userslist  and replace user with selectedUser
+    const updatedUserList = users.map( user => {
+      if(user.id === selectedUser.id) return selectedUser
+      else return user
+    })
+    console.log(updatedUserList)
+    //setUsers with updated user list
+    setUsers(updatedUserList)
+  }
+
+
+
   function updateWorkoutOnList(updatedWorkout){
-    updatedWorkout = addExerciseNameToWorkoutObject(updatedWorkout)
-    const updatedList = workouts.map(wrk =>{
+    //create a copt of the current user and update the edited workout
+    const currentUserCopy = {...currentUser}
+    currentUserCopy.workouts = currentUserCopy.workouts.map( wrk => {
       if(wrk.id === updatedWorkout.id) return updatedWorkout
       else return wrk
     })
-    setWorkouts(updatedList)
-  }
+    //set state of currentUser as copy
+    setCurrentUser(currentUserCopy)
+    
+    //create copy of user list and update with newly edited user obj
+    const updatedUserList = users.map( user =>{
+      if(user.id === updatedWorkout.user_id) return currentUserCopy
+      else return user
+    })
+    //set state of users with new ly updated user list
+    setUsers(updatedUserList)
 
- //other
-  function addExerciseNameToWorkoutObject(workoutObj){
-    //adds exercise name to workout obj, so that the object matched the format of the get requested data
-    const exercise = exercises.find( exer => exer.id === workoutObj.exercise_id)
-    workoutObj['exercise'] = {exercise_name: exercise.exercise_name}
-    return workoutObj
   }
 
   //render
