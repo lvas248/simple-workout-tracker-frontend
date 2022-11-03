@@ -17,8 +17,8 @@ function App() {
 
 //States
   const [ users, setUsers ] = useState([])
-  const [ exercises, setExercises ] = useState([])
   const [ currentUser, setCurrentUser ] = useState({})
+  
 
 //UseEffects
   useEffect(()=>{
@@ -27,11 +27,7 @@ function App() {
     .then(data => setUsers(data))
   },[])
 
-  useEffect(()=>{
-    fetch(URL+'/exercises')
-    .then(res => res.json())
-    .then(data => setExercises(data))
-  },[])
+
 
   
 
@@ -74,22 +70,50 @@ function App() {
 
   //Exercises CRUD
   function addExerciseToList(newExercise){
-    setExercises([...exercises, newExercise])
+
+    const currentUserCopy = {...currentUser}
+    currentUserCopy.exercises = currentUserCopy.exercises.push(newExercise)
+
+    const updatedUserList = users.map( user => {
+      if(user.id === currentUser.id) return currentUserCopy
+      else return user
+    })
+
+    setUsers(updatedUserList)
+
   }
 
   function deleteExeciseFromList(deletedExercise){
-    const updatedList = exercises.filter( exer =>{
+
+    const currentUserCopy = {...currentUser}
+
+    currentUserCopy.exercises = currentUserCopy.filter( exer =>{
       return exer.id !== deletedExercise.id
     })
-    setExercises(updatedList)
+
+    const updatedUserList = users.map( user => {
+      if(user.id === currentUser.id) return currentUserCopy
+      else return user
+    })
+
+    setUsers(updatedUserList)
   }
 
   function updateExerciseOnList(updatedExercise){
-    const updatedList = exercises.map( exer =>{
+
+    const currentUserCopy = {...currentUser}
+
+    currentUserCopy.exercises = currentUser.exercises.map( exer => {
       if(exer.id === updatedExercise.id) return updatedExercise
       else return exer
     })
-    setExercises(updatedList)
+
+    const updatedUserList = users.map( user => {
+      if(user.id === currentUser.id) return currentUserCopy
+      else return user
+    })
+
+    setUsers(updatedUserList)
   }
 
   //Workout CRUD
@@ -146,9 +170,7 @@ function App() {
 
   //render
  
-  const renderExerciseOptions = exercises.map( exer =>{
-    return <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>
-  })  
+  const renderExerciseOptions = currentUser.exercises ? currentUser.exercises.map( exer => <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>) : null
 
   return (
     <div className="App">
@@ -159,7 +181,7 @@ function App() {
         <div id="leftPanel">
           <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
                     
-          {currentUser.id ? <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
+          {currentUser.id ? <ExerciseList currentUser={currentUser} exercises={currentUser.exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
         
         </div>
 

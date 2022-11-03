@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 function WorkoutHistory({URL, currentUser, renderExerciseOptions, workouts, updateWorkoutOnList, deleteWorkoutFromList}){
 
-    //Maybe add a filter or search or reorder??
     const [ reorderBtnClick, setReorderBtnClick ] = useState(false)
     const [ exerciseFilter, setExerciseFilter ] = useState(0)
 

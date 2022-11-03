@@ -1,7 +1,7 @@
 import ExerciseListItem from "./ExerciseListItem"
 import { useState } from 'react'
 
-function ExerciseList({URL, exercises, addExerciseToList, deleteExeciseFromList, updateExerciseOnList}){
+function ExerciseList({URL, currentUser, exercises, addExerciseToList, deleteExeciseFromList, updateExerciseOnList}){
 
     //state
     const [ addBtnClick, setAddBtnClick ] = useState(false)
@@ -20,7 +20,8 @@ function ExerciseList({URL, exercises, addExerciseToList, deleteExeciseFromList,
                 'Content-Type':'application/json'
             },
             body: JSON.stringify({
-                exercise_name: newExerName
+                exercise_name: newExerName,
+                user_id: currentUser.id
             })
         })
         .then( res => res.json())
