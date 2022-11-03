@@ -41,7 +41,6 @@ function WorkoutForm({URL, currentUser, renderExerciseOptions, addToWorkoutList}
     }
     function resetForm(){
         setWorkoutObj({
-            'user_id': currentUser.id,
             'exercise_id': 0,
             'set_num': 1,
             'reps': 0,
