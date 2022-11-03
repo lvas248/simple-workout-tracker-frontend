@@ -52,7 +52,6 @@ function App() {
   }
 
   function addNewUserToUserList(editedUser){
-    editedUser.push({workouts: []})
     setUsers([...users, editedUser])
   }
 
@@ -85,7 +84,6 @@ function App() {
     setExercises(updatedList)
   }
 
-
   function updateExerciseOnList(updatedExercise){
     const updatedList = exercises.map( exer =>{
       if(exer.id === updatedExercise.id) return updatedExercise
@@ -93,8 +91,8 @@ function App() {
     })
     setExercises(updatedList)
   }
-  //Workout CRUD
 
+  //Workout CRUD
   function addToWorkoutList(newWorkout){
   //find the selected user in the list of users and push new workout into their workout array
     const selectedUser = {...currentUser}
@@ -108,8 +106,6 @@ function App() {
     setUsers(updatedUsers)
     // cycle through users, when current user appears, add new workout to their workouts
   }
-
-
 
   function deleteWorkoutFromList(deletedWorkout){
     //copy and update current user (remove deleted workout from it's workout list)
@@ -127,8 +123,6 @@ function App() {
     //setUsers with updated user list
     setUsers(updatedUserList)
   }
-
-
 
   function updateWorkoutOnList(updatedWorkout){
     //create a copt of the current user and update the edited workout
