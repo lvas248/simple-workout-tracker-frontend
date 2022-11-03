@@ -46,7 +46,6 @@ function WorkoutTableRow({wrk, currentUser, URL, renderExerciseOptions, deleteWo
         clickEditBtn()
     }
     
-
     return (
         <tr>
             <td>{convertDate(wrk.created_at)}</td>

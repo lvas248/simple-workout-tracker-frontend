@@ -29,9 +29,8 @@ function App() {
 
 
 
-  
-
 //functions
+
   //User CRUD
   function handleUserChange(selectedUserId){
     if(selectedUserId !== ''){
@@ -84,12 +83,15 @@ function App() {
   }
 
   function deleteExeciseFromList(deletedExercise){
-
+    console.log(deletedExercise)
     const currentUserCopy = {...currentUser}
 
-    currentUserCopy.exercises = currentUserCopy.filter( exer =>{
+    currentUserCopy.exercises = currentUserCopy.exercises.filter( exer =>{
       return exer.id !== deletedExercise.id
     })
+
+
+    setCurrentUser(currentUserCopy)
 
     const updatedUserList = users.map( user => {
       if(user.id === currentUser.id) return currentUserCopy
@@ -100,7 +102,7 @@ function App() {
   }
 
   function updateExerciseOnList(updatedExercise){
-
+    console.log(updatedExercise)
     const currentUserCopy = {...currentUser}
 
     currentUserCopy.exercises = currentUser.exercises.map( exer => {
@@ -108,8 +110,10 @@ function App() {
       else return exer
     })
 
+    setCurrentUser(currentUserCopy)
+
     const updatedUserList = users.map( user => {
-      if(user.id === currentUser.id) return currentUserCopy
+      if(user.id === currentUser.user_id) return currentUserCopy
       else return user
     })
 
@@ -170,7 +174,7 @@ function App() {
 
   //render
  
-  const renderExerciseOptions = currentUser.exercises ? currentUser.exercises.map( exer => <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>) : null
+  const renderExerciseOptions = currentUser.exercises ? currentUser.exercises.map( exer => <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>) : []
 
   return (
     <div className="App">

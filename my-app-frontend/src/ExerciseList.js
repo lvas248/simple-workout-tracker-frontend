@@ -2,7 +2,6 @@ import ExerciseListItem from "./ExerciseListItem"
 import { useState } from 'react'
 
 function ExerciseList({URL, currentUser, exercises, addExerciseToList, deleteExeciseFromList, updateExerciseOnList}){
-
     //state
     const [ addBtnClick, setAddBtnClick ] = useState(false)
     const [ newExerName, setNewExerName ] = useState('')
@@ -30,9 +29,7 @@ function ExerciseList({URL, currentUser, exercises, addExerciseToList, deleteExe
     }
 
     //render
-    const renderExercises = exercises.map( exer =>{
-        return <ExerciseListItem key={exer.id} exer={exer} URL={URL} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>
-    })
+    const renderExercises = exercises.map( exer => <ExerciseListItem key={exer.id} exer={exer} URL={URL} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>)
     
     return (
         <div id='exerciseList'>

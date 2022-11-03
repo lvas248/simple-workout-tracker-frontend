@@ -120,6 +120,8 @@ input{
   padding: 2%;
   margin: auto 5% 5% auto;
   background-color: rgb(115 132 159);
+  border: 2px solid black; 
+
 }
 #wrkTable{
   margin: auto;
