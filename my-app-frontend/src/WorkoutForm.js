@@ -4,7 +4,6 @@ function WorkoutForm({URL, currentUser, renderExerciseOptions, addToWorkoutList}
 
     //state
     const [ workoutObj, setWorkoutObj ] = useState({
-        'user_id': currentUser.id,
         'exercise_id': 0,
         'set_num': 1,
         'reps': 0,
