@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 
-import UserSelect from './UserSelect';
+// import UserSelect from './UserSelect';
 import ExerciseList from './ExerciseList';
 import LogWorkout from './LogWorkout';
 import WorkoutHistory from './WorkoutHistory';
@@ -16,165 +16,82 @@ function App() {
 
 
 //States
-  const [ users, setUsers ] = useState([])
-  const [ currentUser, setCurrentUser ] = useState({})
+  const [ workouts, setWorkouts ] = useState([])
+  const [ exercises, setExercises] = useState([])
   
 
 //UseEffects
   useEffect(()=>{
-    fetch(URL+'/users')
+    fetch(URL+'/workouts')
     .then(res => res.json())
-    .then(data => setUsers(data))
+    .then(data => setWorkouts(data))
   },[])
 
-
+  useEffect(()=>{
+    fetch(URL+'exercises')
+    .then(res => res.json())
+    .then(data => setExercises(data))
+  },[])
 
 //functions
 
-  //User CRUD
-  function handleUserChange(selectedUserId){
-    if(selectedUserId !== ''){
-      const selectedUser = users.find(user =>{
-      return user.id === parseInt(selectedUserId)
-      })
-   
-      setCurrentUser(selectedUser)
-      history.push('/')
-    }else{
-      setCurrentUser({})
-      history.push('/')
-    }
-  }
-
-  function addNewUserToUserList(editedUser){
-    setUsers([...users, editedUser])
-  }
-
-  function updateUserList(editedUser){
-    editedUser.push({workouts: []})
-    const updatedList = users.map( user =>{
-      if(user.id === editedUser.id) return editedUser
-      else return user
-    })
-    setUsers(updatedList)
-  }
-
-  function deleteUserFromList(deletedUser){
-    const updatedUserList = users.filter( user => {
-      return user.id !== deletedUser.id
-    })
-    setUsers(updatedUserList)
-    setCurrentUser({})
-  }
-
   //Exercises CRUD
   function addExerciseToList(newExercise){
-
-    const currentUserCopy = {...currentUser}
-    currentUserCopy.exercises = currentUserCopy.exercises.push(newExercise)
-
-    const updatedUserList = users.map( user => {
-      if(user.id === currentUser.id) return currentUserCopy
-      else return user
-    })
-
-    setUsers(updatedUserList)
-
+    const copy = [...exercises, newExercise]
+    setExercises(copy)
   }
 
   function deleteExeciseFromList(deletedExercise){
-    console.log(deletedExercise)
-    const currentUserCopy = {...currentUser}
-
-    currentUserCopy.exercises = currentUserCopy.exercises.filter( exer =>{
+    const updatedExerciseList = exercises.filter( exer =>{
       return exer.id !== deletedExercise.id
     })
-
-
-    setCurrentUser(currentUserCopy)
-
-    const updatedUserList = users.map( user => {
-      if(user.id === currentUser.id) return currentUserCopy
-      else return user
-    })
-
-    setUsers(updatedUserList)
+    setExercises(updatedExerciseList)
+  
   }
 
   function updateExerciseOnList(updatedExercise){
-    console.log(updatedExercise)
-    const currentUserCopy = {...currentUser}
-
-    currentUserCopy.exercises = currentUser.exercises.map( exer => {
+    //update exerciseList state
+    const updatedExerciseList = exercises.map( exer =>{
       if(exer.id === updatedExercise.id) return updatedExercise
       else return exer
     })
-
-    setCurrentUser(currentUserCopy)
-
-    const updatedUserList = users.map( user => {
-      if(user.id === currentUser.user_id) return currentUserCopy
-      else return user
+    setExercises(updatedExerciseList)
+    //update state of workout list to change  exercise_name of each workout with updated exercis_name
+    const updatedWorkoutList = workouts.map( wrk =>{
+      if(wrk.exercise_id === updatedExercise.id){
+        const updatedObj = {...wrk}
+        updatedObj.exercise.exercise_name = updatedExercise.exercise_name
+        return updatedObj
+      }
+      else return wrk
     })
-
-    setUsers(updatedUserList)
+    setWorkouts(updatedWorkoutList)
   }
 
   //Workout CRUD
   function addToWorkoutList(newWorkout){
-  //find the selected user in the list of users and push new workout into their workout array
-    const selectedUser = {...currentUser}
-    selectedUser.workouts.push(newWorkout)
-    //copy the state of users, replace currentUserObj with newUserObj
-    const updatedUsers = users.map( user => {
-      if(user.id === selectedUser.id) return selectedUser
-      else return user
-    })
-    //set state with update user list
-    setUsers(updatedUsers)
-    // cycle through users, when current user appears, add new workout to their workouts
+      const updatedWorkoutList = [...workouts, newWorkout]
+      setWorkouts(updatedWorkoutList)
   }
 
   function deleteWorkoutFromList(deletedWorkout){
-    //copy and update current user (remove deleted workout from it's workout list)
-    const selectedUser = {...currentUser}
-    selectedUser.workouts = selectedUser.workouts.filter( wrk => wrk.id !== deletedWorkout.id)
-    //set current user state
-    setCurrentUser(selectedUser)
-
-    //copy userslist  and replace user with selectedUser
-    const updatedUserList = users.map( user => {
-      if(user.id === selectedUser.id) return selectedUser
-      else return user
+    const updatedWorkoutList = workouts.filter( wrk =>{
+      return wrk.id !== deletedWorkout.id
     })
-    console.log(updatedUserList)
-    //setUsers with updated user list
-    setUsers(updatedUserList)
+    setWorkouts(updatedWorkoutList)
   }
 
   function updateWorkoutOnList(updatedWorkout){
-    //create a copt of the current user and update the edited workout
-    const currentUserCopy = {...currentUser}
-    currentUserCopy.workouts = currentUserCopy.workouts.map( wrk => {
+    const udpatedWorkoutList = workouts.map( wrk =>{
       if(wrk.id === updatedWorkout.id) return updatedWorkout
       else return wrk
     })
-    //set state of currentUser as copy
-    setCurrentUser(currentUserCopy)
-    
-    //create copy of user list and update with newly edited user obj
-    const updatedUserList = users.map( user =>{
-      if(user.id === updatedWorkout.user_id) return currentUserCopy
-      else return user
-    })
-    //set state of users with new ly updated user list
-    setUsers(updatedUserList)
-
+    setWorkouts(udpatedWorkoutList)
   }
 
   //render
  
-  const renderExerciseOptions = currentUser.exercises ? currentUser.exercises.map( exer => <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>) : []
+  const renderExerciseOptions = exercises.length > 0 ? exercises.map( exer => <option key={exer.id} value={exer.id}>{exer.exercise_name}</option>) : []
 
   return (
     <div className="App">
@@ -183,32 +100,30 @@ function App() {
       <div id="container">
 
         <div id="leftPanel">
-          <UserSelect URL={URL} currentUser={currentUser} users={users} addNewUserToUserList={addNewUserToUserList} handleUserChange={handleUserChange} updateUserList={updateUserList} deleteUserFromList={deleteUserFromList}/>
                     
-          {currentUser.id ? <ExerciseList currentUser={currentUser} exercises={currentUser.exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>: null}
+          <ExerciseList exercises={exercises} URL={URL} addExerciseToList={addExerciseToList} deleteExeciseFromList={deleteExeciseFromList} updateExerciseOnList={updateExerciseOnList}/>
         
         </div>
 
         <div id="rightPanel">
 
           <div id='buttonsDiv'>
-            {currentUser.id ? <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div> : null }  
-            {currentUser.id ? <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div> : null}
+            <div className='btn' onClick={()=>history.push('/log-workout')}>Log Workout</div>
+            <div className='btn' onClick={()=>history.push('/workout-history')}>View Workout History</div>
           </div>
 
           <div>
             <Switch id='showPanel'>
 
               <Route exact path='/'>
-                  {currentUser.id ? null : <h2>Select or Add User</h2>}
               </Route>
 
               <Route path='/log-workout'>
-                  <LogWorkout URL={URL} workouts={currentUser.workouts} currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
+                  <LogWorkout URL={URL} workouts={workouts} renderExerciseOptions={renderExerciseOptions} addToWorkoutList={addToWorkoutList} deleteWorkoutFromList={deleteWorkoutFromList} updateWorkoutOnList={updateWorkoutOnList}/>
               </Route>
 
               <Route path='/workout-history'>
-                <WorkoutHistory URL={URL}currentUser={currentUser} renderExerciseOptions={renderExerciseOptions} workouts={currentUser.workouts} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList} />
+                <WorkoutHistory URL={URL} renderExerciseOptions={renderExerciseOptions} workouts={workouts} updateWorkoutOnList={updateWorkoutOnList} deleteWorkoutFromList={deleteWorkoutFromList} />
               </Route>  
 
             </Switch>
