@@ -46,6 +46,13 @@ function App() {
       return exer.id !== deletedExercise.id
     })
     setExercises(updatedExerciseList)
+
+    //delete all workouts who are associated with  deleted exercise
+    const filteredWorkouts = workouts.filter( wrk =>{
+      return wrk.exercise.exercise_name !== deletedExercise.exercise_name
+    })
+
+    setWorkouts(filteredWorkouts)
   
   }
 
