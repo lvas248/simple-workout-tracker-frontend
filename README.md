@@ -1,70 +1,37 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Simple Workout Tracker 
 
-## Available Scripts
+The Simple Workout Tracker has a simple user interface.  It allows the user to keep track of regularly performed exercises, log workouts daily, and reference previously tracked workouts.
 
-In the project directory, you can run:
+## Badges
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Description
+On initial startup, the page loads an Exercise List section to the left and two buttons labeled Log Workout and View Workout History.
+![Alt Text](/my-app-frontend/media/SWT.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Within the Exercise List Section, the user can create a list of exercises by adding, editing, or deleting from the list.
+![Alt Text](/my-app-frontend/media/exercise.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To record a workout set, the user can click the Log Workout button, which renders a form.  The user can then fill out the form and submit.  As workout sets are submitted, the the set is logged below, in the Today's Workout section.
+![Alt Text](/my-app-frontend/media/log.gif)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Within the Today's Workouts section, the user can edit or delete any recorded workout set.
+![Alt Text](/my-app-frontend/media/edit.gif)
 
-### `npm run eject`
+Lastly, all workout history can be viewd ny clicking on the view workout history button.  The user can filter though the workout sets by selecting an exercise from the dropdown menu.  The user can also reorganize the workouts by data by clicking the reorder button.
+![Alt Text](/my-app-frontend/media/history.gif)
+## License
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[MIT](https://choosealicense.com/licenses/mit/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Related
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[Simple Workout Tracker (Backend)](https://github.com/lvas248/simple-workout-tracker-backend)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

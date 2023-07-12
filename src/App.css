@@ -1,11 +1,9 @@
 .App {
   text-align: center;
+  background-color: rgb(8,18,23);
+  color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,26 +11,118 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#container{
+    display: grid;
+    grid-template-columns: 33% 67%;
+}
+
+#userSelect > * {
+  margin: 5%;
+}
+
+#rightPanel{
+  background-color: rgb(68  107 144);
+  /* padding: 0 10%; */
+}
+
+#exerciseList, #userSelect, .btn{
+  background-color: rgb(59  81  114);
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 5%;
+  border: 2px solid black; 
+  margin: 5%;
 }
 
-.App-link {
-  color: #61dafb;
+.btn {
+  padding: 5%;
+  cursor: pointer;
+  color: rgb(23 201 68);
+  width: 25%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#exerTable{
+  margin: auto;
+  text-align: left;
+}
+
+.set{
+  display: flex;
+  justify-content: center;
+}
+
+.set > * {
+  margin: 2% 4%;
+}
+
+#innerForm > * {
+  margin: 2%
+}
+
+#wrkForm input{
+  width: 5%;
+  text-align: center;
+}
+
+#wrkForm {
+  border-bottom: 2px white solid;
+  padding-bottom: 5%;
+}
+
+
+thead{
+  border-bottom: white 2px solid;
+}
+
+#rightPanel td{
+  border-left: white 1px solid;
+  border-top: white 1px solid;
+  padding: auto 4px;
+  width:2%;
+}
+
+#rightPanel h2 {
+  color: rgb(23 201 68);
+}
+
+select {
+  width: auto;
+  text-align: center;
+}
+
+input{
+  max-width: 25px;
+  text-align: center;
+}
+
+#leftPanel{
+  background-color: rgb(68  107 144);
+  padding: 5%;
+}
+
+#userEditForm input, #exerciseList input, #addUserForm input, #workoutHistory input {
+  max-width: 100px
+}
+#filter {
+  margin: 5% auto;
+}
+
+#filter button {
+  margin: auto 3%
+}
+
+#buttonsDiv{
+  display: flex;
+  gap: 5%;
+  background-color: rgb(68  107 144);
+}
+
+#showPanel {
+  padding: 2%;
+  margin: auto 5% 5% auto;
+  background-color: rgb(115 132 159);
+  border: 2px solid black; 
+
+}
+#wrkTable{
+  margin: auto;
 }
